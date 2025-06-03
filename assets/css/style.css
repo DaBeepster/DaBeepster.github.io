@@ -42,7 +42,7 @@
   * 2. Remove the margin in Firefox and Safari.
   */
 @font-face {
-  font-family: mcraft;
+  font-family: 'mcraft';
   src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.ttf");
   font-style: monospace;
 }
