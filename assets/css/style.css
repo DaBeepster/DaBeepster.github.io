@@ -43,7 +43,7 @@
   */
 @font-face {
   font-family: mcraft;
-  src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.woff");
+  src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.ttf");
   font-style: monospace;
 }
 button,
@@ -195,7 +195,7 @@ textarea {
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
-  font: mcraft;
+  font-family: mcraft;
   /* 2 */ }
 
 /* ==========================================================================
@@ -390,7 +390,7 @@ hr {
 pre {
   font-size: 1em;
   /* 2 */
-  font-family: monospace;
+  font-family: mcraft;
   /* 1 */ }
 
 /**
@@ -421,7 +421,7 @@ kbd,
 samp {
   font-size: 1em;
   /* 2 */
-  font-family: monospace;
+  font-family: mcraft;
   /* 1 */ }
 
 /**
