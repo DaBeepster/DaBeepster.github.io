@@ -217,7 +217,9 @@ html {
 body {
   margin: 0;
   /* Remove the margin in all browsers */
-  color: inherit; }
+  color: inherit;
+  font-family: mcraft;
+}
 
 * {
   font-family: 'mcraft';
