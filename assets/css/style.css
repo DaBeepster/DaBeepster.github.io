@@ -55,7 +55,7 @@ textarea {
   /* 2 */
   font-size: 100%;
   /* 1 */
-  font-family: mcraft;
+  font-family: 'mcraft';
   /* 1 */
   line-height: 1.15;
   /* 1 */ }
@@ -195,7 +195,7 @@ textarea {
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
-  font-family: mcraft;
+  font: 'mcraft';
   /* 2 */ }
 
 /* ==========================================================================
@@ -220,7 +220,7 @@ body {
   color: inherit; }
 
 * {
-  font-family: mcraft;
+  font-family: 'mcraft';
   color: #ffffff;
   text-shadow: 2px 2px #3f3f3f; }
 
@@ -390,7 +390,7 @@ hr {
 pre {
   font-size: 1em;
   /* 2 */
-  font-family: mcraft;
+  font-family: 'mcraft';
   /* 1 */ }
 
 /**
@@ -421,7 +421,7 @@ kbd,
 samp {
   font-size: 1em;
   /* 2 */
-  font-family: mcraft;
+  font-family: 'mcraft';
   /* 1 */ }
 
 /**
