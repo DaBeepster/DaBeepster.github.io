@@ -44,7 +44,6 @@
 @font-face {
   font-family: 'mcraft';
   src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.ttf");
-  font-style: monospace;
 }
 button,
 input,
@@ -55,7 +54,7 @@ textarea {
   /* 2 */
   font-size: 100%;
   /* 1 */
-  font-family: 'mcraft';
+  font-family: mcraft;
   /* 1 */
   line-height: 1.15;
   /* 1 */ }
@@ -195,7 +194,7 @@ textarea {
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
-  font: 'mcraft';
+  font: mcraft;
   /* 2 */ }
 
 /* ==========================================================================
@@ -222,7 +221,7 @@ body {
 }
 
 * {
-  font-family: 'mcraft';
+  font-family: mcraft;
   color: #ffffff;
   text-shadow: 2px 2px #3f3f3f; }
 
@@ -238,7 +237,9 @@ svg:not(:root) {
   top: 6px;
   left: 8px;
   z-index: 1;
-  pointer-events: none; }
+  pointer-events: none;
+  font-family: mcraft;
+}
 
 #hotbar {
   width: 184px;
@@ -254,7 +255,9 @@ svg:not(:root) {
   bottom: 8px;
   left: 8px;
   z-index: 3;
-  pointer-events: none; }
+  pointer-events: none;
+  font-family: mcraft;
+}
 
 #previewWindow {
   position: absolute;
@@ -265,7 +268,9 @@ svg:not(:root) {
   left: 0;
   width: 480px;
   height: 300px;
-  z-index: 4; }
+  z-index: 4;
+  font-family: mcraft;
+}
 
 #menu {
   position: absolute;
@@ -274,7 +279,9 @@ svg:not(:root) {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 5; }
+  z-index: 5;
+  font-family: mcraft;
+}
 
 @font-face {
   font-family: 'Minecraft';
@@ -288,7 +295,9 @@ svg:not(:root) {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 6; }
+  z-index: 6;
+  font-family: mcraft;
+}
 
 #overlay {
   position: absolute;
