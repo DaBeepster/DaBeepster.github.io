@@ -43,7 +43,7 @@
   */
 @font-face {
   font-family: mcraft;
-  src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.ttf");
+  src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.woff");
   font-style: monospace;
 }
 button,
