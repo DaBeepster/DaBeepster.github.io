@@ -41,10 +41,6 @@
   * 1. Change the font styles in all browsers (opinionated).
   * 2. Remove the margin in Firefox and Safari.
   */
-@font-face {
-  font-family: 'mcraft';
-  src: url("https://dabeepster.github.io/assets/fonts/minecraftfont.ttf");
-}
 button,
 input,
 optgroup,
@@ -54,7 +50,7 @@ textarea {
   /* 2 */
   font-size: 100%;
   /* 1 */
-  font-family: mcraft;
+  font-family: sans-serif;
   /* 1 */
   line-height: 1.15;
   /* 1 */ }
@@ -194,7 +190,7 @@ textarea {
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
-  font: mcraft;
+  font: inherit;
   /* 2 */ }
 
 /* ==========================================================================
@@ -216,12 +212,10 @@ html {
 body {
   margin: 0;
   /* Remove the margin in all browsers */
-  color: inherit;
-  font-family: mcraft;
-}
+  color: inherit; }
 
 * {
-  font-family: mcraft;
+  font-family: Minecraft;
   color: #ffffff;
   text-shadow: 2px 2px #3f3f3f; }
 
@@ -237,9 +231,7 @@ svg:not(:root) {
   top: 6px;
   left: 8px;
   z-index: 1;
-  pointer-events: none;
-  font-family: mcraft;
-}
+  pointer-events: none; }
 
 #hotbar {
   width: 184px;
@@ -255,9 +247,7 @@ svg:not(:root) {
   bottom: 8px;
   left: 8px;
   z-index: 3;
-  pointer-events: none;
-  font-family: mcraft;
-}
+  pointer-events: none; }
 
 #previewWindow {
   position: absolute;
@@ -268,9 +258,7 @@ svg:not(:root) {
   left: 0;
   width: 480px;
   height: 300px;
-  z-index: 4;
-  font-family: mcraft;
-}
+  z-index: 4; }
 
 #menu {
   position: absolute;
@@ -279,14 +267,12 @@ svg:not(:root) {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 5;
-  font-family: mcraft;
-}
+  z-index: 5; }
 
 @font-face {
   font-family: 'Minecraft';
-  src: url("./assets/fonts/minecraftfont.eot");
-  src: url("./assets/fonts/minecraftfont.woff") format("woff"), url("./assets/fonts/minecraftfont.ttf") format("truetype"); }
+  src: url("/assets/fonts/minecraftfont.eot");
+  src: url("/assets/fonts/minecraftfont.woff") format("woff"), url("/assets/fonts/minecraftfont.ttf") format("truetype"); }
 
 #progress {
   position: absolute;
@@ -295,9 +281,7 @@ svg:not(:root) {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 6;
-  font-family: mcraft;
-}
+  z-index: 6; }
 
 #overlay {
   position: absolute;
@@ -320,7 +304,7 @@ svg:not(:root) {
   height: 100%;
   text-align: center;
   z-index: 8;
-  background-image: url("./assets/textures/background.jpg");
+  background-image: url("/assets/textures/background.jpg");
   background-size: cover;
   background-position: center; }
 
@@ -356,7 +340,7 @@ svg:not(:root) {
   height: 100%;
   text-align: center;
   z-index: 8;
-  background-image: url("./assets/textures/background.jpg");
+  background-image: url("/assets/textures/background.jpg");
   background-size: cover;
   background-position: center; }
 
@@ -401,7 +385,7 @@ hr {
 pre {
   font-size: 1em;
   /* 2 */
-  font-family: 'mcraft';
+  font-family: monospace;
   /* 1 */ }
 
 /**
@@ -432,7 +416,7 @@ kbd,
 samp {
   font-size: 1em;
   /* 2 */
-  font-family: 'mcraft';
+  font-family: monospace;
   /* 1 */ }
 
 /**
