@@ -5,7 +5,7 @@
 }
 @font-face {
   font-family: pixelop;
-  src: url(/font/pixeloperator.woff2);
+  src: url(./font/pixeloperator.woff2);
   font-style: monospace;
 }
 .hi {
