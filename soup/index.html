@@ -1,1 +1,147 @@
-hi
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Silly Stuff</title>
+    <link rel="icon" href="/trans.ico" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="/main.js" type="text/javascript"></script>
+    <script src="/main2.js" type="text/javascript"></script>
+    <script src="/base64.js" type="text/javascript"></script>
+    <script src="/rainbow_table.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="/reversemd5.js" type="text/javascript"></script>
+    <script src="/caesar.js" type="text/javascript"></script>
+    <script src="/exitprompt.js" type="text/javascript"></script>
+    <script src="/filedownloadcode.js" type="text/javascript"></script>
+    <script src="/convertimage.js" type="text/javascript"></script>
+    <script src="/richtext.js" type="text/javascript"></script>
+    <script src="/compressimage.js" type="text/javascript"></script>
+    <script src="/resize-image.js" type="text/javascript"></script>
+    <script src="/grr.js" type="text/javascript"></script>
+    <script src="/displayimage.js" type="text/javascript"></script>
+    <meta name="description" content="something silly" />
+    <meta
+      property="og:image"
+      content="https://among-sussus.glitch.me/ventisquish.webp"
+    />
+    <link
+      rel="image_src"
+      href="https://i.ytimg.com/vi/PsERYZFY87A/maxresdefault.jpg"
+    />
+  </head>
+  <body>
+    <noscript>Pls enable javascript</noscript>
+    <textarea id="heh" placeholder="&#62;" class="tex"></textarea>
+    <textarea id="log" placeholder="logs" class="tex" readonly></textarea>
+    <button onclick="swapDivs()" style="background-color: red">
+      Toggle Text/File Manipulation
+    </button>
+    <div class="buts" id="txtButtons">
+      <button onclick="toggleRichText();">Toggle Rich Text</button>
+      <button onclick="txt();">Text</button>
+      <button onclick="hml();">HTML</button>
+      <button onclick="base();">Encode base64</button>
+      <button onclick="notbase();">Decode base64</button>
+      <button
+        onclick="eval(atob('ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2hlaCcpLnZhbHVlID0gZ2VuZXJhdGVSYW5kb21TdHJpbmcocGFyc2VJbnQocHJvbXB0KCJsZW5ndGgiLCI3IikpLCBwcm9tcHQoImNoYXJzZXQiLCAiQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODkiKS50b1N0cmluZygpKS50b1N0cmluZygpOw=='));"
+      >
+        Random String
+      </button>
+      <button onclick="openTextAsDataURI();">Open As HTML</button>
+      <button
+        onclick="eval(atob('ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2hlaCcpLnZhbHVlID0gJyc7'));"
+      >
+        Clear Text
+      </button>
+      <button onclick="enur();">Encode URI</button>
+      <button onclick="deur();">Decode URI</button>
+      <button onclick="encodeHtml();">Convert To HTML Entities</button>
+      <button onclick="decodeHtml();">HTML Entities To Text</button>
+      <button id="scrambleButton">Scramble Text</button>
+      <button onclick="save1();" class="savebutton">Text Save 1</button>
+      <button onclick="load1();">Text Load 1</button>
+      <button onclick="save2();" class="savebutton">Text Save 2</button>
+      <button onclick="load2();">Text Load 2</button>
+      <button onclick="saveThree();" class="savebutton">Text Save 3</button>
+      <button onclick="loadThree();">Text Load 3</button>
+      <button onclick="saveFour();" class="savebutton">Text Save 4</button>
+      <button onclick="loadFour();">Text Load 4</button>
+      <button onclick="saveFive();" class="savebutton">Text Save 5</button>
+      <button onclick="loadFive();">Text Load 5</button>
+      <button onclick="saveSix();" class="savebutton">Text Save 6</button>
+      <button onclick="loadSix();">Text Load 6</button>
+      <button onclick="saveSeven();" class="savebutton">Text Save 7</button>
+      <button onclick="loadSeven();">Text Load 7</button>
+      <button onclick="saveImp();" class="savebutton">Important Save</button>
+      <button onclick="loadImp();">Important Load</button>
+      <button onclick="saveTemp();" class="savebutton">Temp Save</button>
+      <button onclick="loadTemp();">Temp Load</button>
+      <button onclick="numToRoman();">Convert Int To Roman</button>
+      <button onclick="romanToNum();">Convert Roman To Int</button>
+      <button onclick="document.location='/gamez.html'" class="gamesbutton">
+        Games
+      </button>
+      <button onclick="linkTemplate();">Link Template</button>
+      <button onclick="imageTemplate();">Image Template</button>
+      <button onclick="iframeTemplate();">iframe Template</button>
+      <button onclick="setTitle();">Change Title</button>
+      <button onclick="downloadContent();">Download Content</button>
+      <button onclick="splitTest();">Split Text</button>
+      <button onclick="charCount();">Character Count</button>
+      <button onclick="MD5(document.getElementById('heh').value);">
+        MD5 Hash
+      </button>
+      <button onclick="undoMd5();">Undo MD5 (may lag)</button>
+      <button onclick="spawnUniqueChars();">Generate Character List</button>
+      <button onclick="getCharsWithCount();">
+        Generate Charlist With Count
+      </button>
+      <button onclick="spawnUniqueCharsForHash();">
+        Generate Charlist For Dehashing
+      </button>
+      <button onclick="textCompare();">Compare Text</button>
+      <button onclick="byelog();">Clear Logs</button>
+      <button onclick="addHashManually()">Add Hash Manually</button>
+      <button onclick="removeHashManually()">Remove Hash Manually</button>
+      <button onclick="clearTable()">Clear Rainbow Table</button>
+      <button onclick="displayRainbowTable()">Display Rainbow Table</button>
+      <button onclick="caesarEncode();">Caesar Cipher</button>
+      <button onclick="convertToHex();">Convert To Hex</button>
+    </div>
+    <div class="buts hidden" id="imgButtons">
+      <input type="file" id="fileInput" accept="*/*" />
+      <button id="encodeButton">Encode File to Base64</button>
+      <button id="displayButton">Display File Contents</button>
+      <button id="imageButton">Display Image</button>
+      <button id="convertButton">Convert Image</button>
+      <select id="formatSelect">
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/webp">WebP</option>
+      </select>
+      <label for="qualityRange">Compression Quality:</label>
+      <input
+        type="range"
+        id="qualityRange"
+        min="0"
+        max="1"
+        step="0.1"
+        value="1"
+      />
+      <span id="qualityValue">1</span>
+      <button id="compressButton">Compress Image</button>
+      <button id="resizeButton">Resize Image</button>
+      <button><a id="downloadLink">Download Image</a></button>
+    </div>
+    <br />
+    <div class="hi" id="obe"></div>
+    <span
+      id="sus"
+      width="0px"
+      height="0px"
+      style="color: white"
+      max-width="0px"
+      max-height="0px"
+    ></span>
+  </body>
+</html>
