@@ -1,0 +1,75 @@
+@font-face {
+  font-family: pRune;
+  src: url(/font/pixelrunes.ttf);
+  font-style: monospace;
+}
+@font-face {
+  font-family: pixelop;
+  src: url(/font/pixeloperator.woff2);
+  font-style: monospace;
+}
+.hi {
+  display: inline-block;
+  max-width: 100%;
+  word-wrap: break-word;
+  font-family: monospace;
+  white-space: pre-wrap;
+  font-size: 20px;
+}
+.buts {
+  max-width: 30%;
+  display: inline;
+}
+.tex {
+  max-width: 49%;
+  max-height: 50%;
+  height: 250px;
+  width: 49%;
+  background-color:black;
+  color:lime;
+  font-family: pixelop;
+  font-size: 16px;
+  display: inline-block;
+  resize: none;
+}
+.tex2 {
+  max-width: 49%;
+  max-height: 50%;
+  height: 250px;
+  width: 49%;
+  background-color:white;
+  color:black;
+  font-size: 16px;
+  display: inline-block;
+  resize: none;
+}
+.gamesbutton {
+  background-image: linear-gradient(to right, red, orange, yellow, green, cyan, violet);
+  color: purple;
+}
+.gamesbutton:hover {
+  cursor: pointer;
+}
+.savebutton {
+  background-color: lime;
+  color: black;
+}
+img {
+  image-rendering: pixelated;
+}
+body {
+  background-color: white;
+  color: black;
+}
+button {
+  background-color:lightgray;
+  color: black;
+}
+#sus {
+  word-wrap: break-word;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+.hidden {
+  display: none;
+}
