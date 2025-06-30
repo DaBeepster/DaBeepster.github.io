@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update the quality value label when the range slider is changed
     const qualityRange = document.getElementById('qualityRange');
-    const qualityValue = document.getElementById('qualityValue');
     
-    qualityRange.addEventListener('input', function() {
-        qualityValue.textContent = qualityRange.value;
-    });
 
     // Store the selected image file when the user selects it
     document.getElementById('fileInput').addEventListener('change', function(event) {
