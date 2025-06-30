@@ -10,15 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedFile) {
             const reader = new FileReader();
 
-            // Prompt user for dimensions
-            let outputWidth = parseInt(prompt("Width? (Leave blank to auto-calculate)"), 10);
-            let outputHeight = parseInt(prompt("Height? (Leave blank to auto-calculate)"), 10);
 
             reader.onload = function(e) {
                 const img = new Image();
                 img.src = e.target.result;
 
                 img.onload = function() {
+                    // Prompt user for dimensions
+                    let outputWidth = parseInt(prompt(`Width? (Leave blank to auto-calculate) (${img.width})`), 10);
+                    let outputHeight = parseInt(prompt(`Height? (Leave blank to auto-calculate) (${img.height})`), 10);
                     // Step 3: Adjust dimensions based on aspect ratio if needed
                     const aspectRatio = img.width / img.height;
 
