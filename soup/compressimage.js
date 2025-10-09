@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Display the compressed image inside the 'obe' div
                     const obeDiv = document.getElementById('obe');
                     obeDiv.innerHTML = `<img src="${compressedDataUrl}" alt="Compressed Image" style="max-width: 100%;">`;
+                    document.getElementById('log').value = "Image Compressed";
 
                     // Create a download link for the compressed image
                     const downloadLink = document.getElementById('downloadLink');
