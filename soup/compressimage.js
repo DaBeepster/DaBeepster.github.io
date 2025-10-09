@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Compress the image when the "Compress Image" button is clicked
     document.getElementById('compressButton').addEventListener('click', function() {
+        document.getElementById('log').value = "";
         if (selectedFile) {
             const reader = new FileReader();
 

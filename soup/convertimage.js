@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Convert the image to the selected format when the button is clicked
     document.getElementById('convertButton').addEventListener('click', function() {
+        document.getElementById('log').value = "";
         if (selectedFile) {
             const reader = new FileReader();
             const outputFormat = document.getElementById('formatSelect').value; // Get selected output format
