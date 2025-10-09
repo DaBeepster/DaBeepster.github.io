@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Display the converted image inside the 'obe' div
                     const obeDiv = document.getElementById('obe');
                     obeDiv.innerHTML = `<img src="${convertedDataUrl}" alt="Converted Image" style="max-width: 100%;">`;
+                    document.getElementById('log').value = "Image Converted";
                     const downloadLink = document.getElementById('downloadLink');
                     downloadLink.href = convertedDataUrl;
                     downloadLink.download = `converted-image.${outputFormat.split('/')[1]}`;
