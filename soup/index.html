@@ -20,6 +20,146 @@
     <script src="./resize-image.js" type="text/javascript"></script>
     <script src="./grr.js" type="text/javascript"></script>
     <script src="./displayimage.js" type="text/javascript"></script>
+    <script type="module">
+import { createFFmpeg, fetchFile } from "https://unpkg.com/@ffmpeg/ffmpeg@0.12.9/dist/esm/index.js";
+
+document.addEventListener('DOMContentLoaded', async () => {
+  let selectedFile = null;
+  let ffmpeg;        // will lazy-init on first convert
+  let ffmpegReady = false;
+
+  const fileInput = document.getElementById('fileInput');
+  const convertButton = document.getElementById('convertButton');
+  const formatSelect = document.getElementById('formatSelect');
+  const logBox = document.getElementById('log');
+  const obeDiv = document.getElementById('obe');
+  const downloadLink = document.getElementById('downloadLink');
+
+  const appendLog = (msg) => {
+    if (!logBox) return;
+    logBox.value += (logBox.value ? "\n" : "") + msg;
+    logBox.scrollTop = logBox.scrollHeight;
+  };
+
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files?.[0];
+    selectedFile = file || null;
+    if (selectedFile) {
+      appendLog(`Selected: ${selectedFile.name} (${Math.round(selectedFile.size/1024/1024)} MB)`);
+    }
+  });
+
+  // Minimal arg presets for common outputs
+  const buildArgs = (inputName, outputFormat) => {
+    if (outputFormat === 'mp4') {
+      // H.264 + AAC inside MP4 (widely compatible)
+      return [
+        '-i', inputName,
+        '-c:v', 'libx264',
+        '-preset', 'medium',
+        '-crf', '23',
+        '-movflags', 'faststart',
+        '-c:a', 'aac',
+        '-b:a', '192k',
+        'output.mp4'
+      ];
+    }
+    if (outputFormat === 'webm') {
+      // VP9 + Opus inside WebM
+      return [
+        '-i', inputName,
+        '-c:v', 'libvpx-vp9',
+        '-b:v', '0',
+        '-crf', '33',
+        '-c:a', 'libopus',
+        '-b:a', '128k',
+        'output.webm'
+      ];
+    }
+    throw new Error(`Unsupported output format: ${outputFormat}`);
+  };
+
+  const getMimeFor = (fmt) =>
+    fmt === 'mp4' ? 'video/mp4'
+    : fmt === 'webm' ? 'video/webm'
+    : 'application/octet-stream';
+
+  convertButton.addEventListener('click', async () => {
+    if (!selectedFile) {
+      alert('No video file selected.');
+      return;
+    }
+
+    obeDiv.innerHTML = '';
+    downloadLink.style.display = 'none';
+    if (logBox) logBox.value = '';
+
+    const outputFormat = (formatSelect?.value || 'mp4').toLowerCase();
+    const inputExt = (selectedFile.name.split('.').pop() || 'dat').toLowerCase();
+    const inputName = `input.${inputExt}`;
+
+    try {
+      // Lazy-load ffmpeg the first time only
+      if (!ffmpegReady) {
+        appendLog('Loading FFmpeg (this can take a few seconds the first time)...');
+        ffmpeg = createFFmpeg({
+          log: true,
+          corePath: "https://unpkg.com/@ffmpeg/core@0.12.9/dist/ffmpeg-core.js"
+        });
+        ffmpeg.setLogger(({ type, message }) => {
+          // Reduce noise; keep progress + key info
+          if (type === 'info' || type === 'fferr') appendLog(message);
+        });
+        await ffmpeg.load();
+        ffmpegReady = true;
+        appendLog('FFmpeg loaded.');
+      }
+
+      // Write the input file to the in-memory FS
+      appendLog('Preparing input...');
+      ffmpeg.FS('writeFile', inputName, await fetchFile(selectedFile));
+
+      // Build args and run the transcode
+      const args = buildArgs(inputName, outputFormat);
+      appendLog(`Running: ffmpeg ${args.join(' ')}`);
+      const startTs = performance.now();
+      await ffmpeg.run(...args);
+      const ms = Math.round(performance.now() - startTs);
+      appendLog(`Done in ${ms} ms.`);
+
+      // Read the output
+      const outName = args[args.length - 1];
+      const data = ffmpeg.FS('readFile', outName);
+      const mime = getMimeFor(outputFormat);
+      const blob = new Blob([data.buffer], { type: mime });
+      const url = URL.createObjectURL(blob);
+
+      // Preview in a <video> and expose download link
+      obeDiv.innerHTML = `
+        <video controls playsinline style="max-width:100%; height:auto;" src="${url}"></video>
+      `;
+
+      downloadLink.href = url;
+      const base = selectedFile.name.replace(/\.[^.]+$/, '');
+      downloadLink.download = `${base}-converted.${outputFormat}`;
+      downloadLink.style.display = 'inline';
+
+      appendLog('Conversion complete. Preview above; use the Download link to save the file.');
+
+      // Cleanup FS (optional)
+      try {
+        ffmpeg.FS('unlink', inputName);
+        ffmpeg.FS('unlink', outName);
+      } catch { /* ignore */ }
+
+    } catch (err) {
+      console.error(err);
+      appendLog(`Error: ${err?.message || err}`);
+      alert('Conversion failed. See log for details.');
+    }
+  });
+});
+</script>
     <meta name="description" content="something silly" />
     <meta
       property="og:image"
@@ -114,13 +254,13 @@
       <button id="encodeButton">Encode File to Base64</button>
       <button id="displayButton">Display File Contents</button>
       <button id="imageButton">Display Image</button>
-      <button id="convertButton">Convert Image</button>
+      <button id="convertButton">Convert File</button>
       <select id="formatSelect">
         <option value="image/png">PNG</option>
         <option value="image/jpeg">JPEG</option>
         <option value="image/webp">WebP</option>
-        <option value="image/avif">Avif</option>
-        <option value="image/bmp">Bitmap</option>
+        <option value="mp4">MP4 (H.264/AAC)</option>
+        <option value="webm">WebM (VP9/Opus)</option>
       </select>
       <label for="qualityRange">Compression Quality:</label>
       <input
