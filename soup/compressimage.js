@@ -1,60 +1,76 @@
 document.addEventListener('DOMContentLoaded', function() {
     let selectedFile = null;
 
-    // Update the quality value label when the range slider is changed
+    // Get slider element
     const qualityRange = document.getElementById('qualityRange');
-    
 
-    // Store the selected image file when the user selects it
+    // Helper: promisified toBlob
+    function canvasToBlob(canvas, type, quality) {
+        return new Promise(resolve => canvas.toBlob(resolve, type, quality));
+    }
+
+    // Store selected file
     document.getElementById('fileInput').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        selectedFile = file;
+        selectedFile = event.target.files[0] || null;
     });
 
-    // Compress the image when the "Compress Image" button is clicked
-    document.getElementById('compressButton').addEventListener('click', function() {
+    // Compress the image when "Compress Image" is clicked
+    document.getElementById('compressButton').addEventListener('click', async function() {
         document.getElementById('log').value = "";
-        if (selectedFile) {
-            const reader = new FileReader();
+        if (!selectedFile) {
+            alert('No image file selected.');
+            return;
+        }
 
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = async function() {
+                // Draw image to canvas
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
 
-                img.onload = function() {
-                    // Create a canvas and draw the image on it
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
+                // Determine output format
+                let outputFormat;
+                const quality = parseFloat(qualityRange.value);
+                if (selectedFile.type === 'image/jpeg' || quality <= 0.1) {
+                    outputFormat = 'image/jpeg';
+                } else {
+                    outputFormat = 'image/webp';
+                }
 
-                    ctx.drawImage(img, 0, 0);
-
-                    // Compress the image (JPEG/WebP compression with adjustable quality)
-                    if (selectedFile.type === 'image/jpeg' || qualityRange.value <= 0.1) {
-                      var outputFormat = 'image/jpeg';
-                    } else {
-                      var outputFormat = 'image/webp';
+                try {
+                    // Convert to blob
+                    const blob = await canvasToBlob(canvas, outputFormat, quality);
+                    if (!blob) {
+                        document.getElementById('log').value = 'Compression failed (format not supported).';
+                        return;
                     }
-                    const quality = parseFloat(qualityRange.value); // Get compression quality from the slider
-                    const compressedDataUrl = canvas.toDataURL(outputFormat, quality);
 
-                    // Display the compressed image inside the 'obe' div
+                    const objectUrl = URL.createObjectURL(blob);
+
+                    // Display compressed image
                     const obeDiv = document.getElementById('obe');
-                    obeDiv.innerHTML = `<img src="${compressedDataUrl}" alt="Compressed Image" style="max-width: 100%;">`;
-                    document.getElementById('log').value = "Image Compressed";
+                    obeDiv.innerHTML = `<img src="${objectUrl}" alt="Compressed Image" style="max-width: 100%;">`;
 
-                    // Create a download link for the compressed image
+                    // Update log
+                    document.getElementById('log').value = `Image compressed (${outputFormat}, quality: ${quality})`;
+
+                    // Create download link
                     const downloadLink = document.getElementById('downloadLink');
-                    downloadLink.href = compressedDataUrl;
+                    downloadLink.href = objectUrl;
                     downloadLink.download = `compressed-image.${outputFormat.split('/')[1]}`;
                     downloadLink.style.display = 'inline';
-                };
+                } catch (error) {
+                    console.error('Compression error:', error);
+                    document.getElementById('log').value = 'Error during compression: ' + error.message;
+                }
             };
-
-            reader.readAsDataURL(selectedFile);
-        } else {
-            alert('No image file selected.');
-        }
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(selectedFile);
     });
 });
