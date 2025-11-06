@@ -105,31 +105,68 @@
       <button onclick="convertToHex();">Convert To Hex</button>
     </div>
     <div class="buts hidden" id="imgButtons">
-      <input type="file" id="fileInput" accept="*/*" />
-      <button id="encodeButton">Encode File to Base64</button>
-      <button id="displayButton">Display File Contents</button>
-      <button id="imageButton">Display Image</button>
-      <button id="convertButton">Convert Image</button>
+  <input type="file" id="fileInput" accept="image/*" />
+
+  <label style="margin-left:8px;">
+    Mode:
+    <select id="modeSelect">
+      <option value="convert">Convert</option>
+      <option value="compress">Compress</option>
+      <option value="resize">Resize</option>
+    </select>
+  </label>
+
+  <span id="convertControls">
+    <label style="margin-left:12px;">
+      Format:
       <select id="formatSelect">
-        <option value="png">PNG</option>
-        <option value="jpeg">JPEG</option>
-        <option value="webp">WebP</option>
-        <option value="bmp">Bitmap</option>
-        <option valie="avif">Avif</option>
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/webp">WEBP</option>
+        <option value="image/avif">AVIF</option>
+        <option value="image/bmp">BMP</option>
       </select>
-      <label for="qualityRange">Compression Quality:</label>
-      <input
-        type="number"
-        id="qualityRange"
-        min="0"
-        max="1"
-        step="0.1"
-        value="1"
-      />
-      <button id="compressButton">Compress Image</button>
-      <button id="resizeButton">Resize Image</button>
-      <button><a id="downloadLink">Download Image</a></button>
-    </div>
+    </label>
+  </span>
+
+  <span id="compressControls" style="display:none;">
+    <label style="margin-left:12px;">
+      Quality:
+      <input type="range" id="qualityRange" min="0.05" max="1" step="0.05" value="0.9" />
+      <span id="qualityVal">0.90</span>
+    </label>
+  </span>
+
+  <span id="resizeControls" style="display:none;">
+    <label style="margin-left:12px;">
+      Width:
+      <input type="number" id="widthInput" placeholder="auto" min="1" />
+    </label>
+    <label style="margin-left:12px;">
+      Height:
+      <input type="number" id="heightInput" placeholder="auto" min="1" />
+    </label>
+    <label style="margin-left:12px;">
+      Output type:
+      <select id="resizeMimeSelect">
+        <option value="">Same as input</option>
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/webp">WEBP</option>
+        <option value="image/avif">AVIF</option>
+        <option value="image/bmp">BMP</option>
+      </select>
+    </label>
+    <label style="margin-left:12px;">
+      Quality (if applicable):
+      <input type="range" id="resizeQuality" min="0.05" max="1" step="0.05" value="0.9" />
+      <span id="resizeQualityVal">0.90</span>
+    </label>
+  </span>
+
+  <button id="goButton" style="margin-left:12px;">Go</button>
+</div>
+
     <br />
     <div class="hi" id="obe"></div>
     <span
