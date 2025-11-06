@@ -27,16 +27,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     ctx.drawImage(img, 0, 0);
 
-                    // Convert the canvas content to the selected image format
-                    const convertedDataUrl = canvas.toDataURL(outputFormat);
+                    // Determine MIME type for supported formats
+                    let mimeType = '';
+                    switch (outputFormat) {
+                        case 'png':
+                            mimeType = 'image/png';
+                            break;
+                        case 'jpeg':
+                        case 'jpg':
+                            mimeType = 'image/jpeg';
+                            break;
+                        case 'webp':
+                            mimeType = 'image/webp';
+                            break;
+                        case 'bmp':
+                            mimeType = 'image/bmp';
+                            break;
+                        case 'avif':
+                            mimeType = 'image/avif';
+                            break;
+                        default:
+                            mimeType = 'image/png';
+                    }
 
-                    // Display the converted image inside the 'obe' div
+                    // Try to convert canvas to the selected format
+                    let convertedDataUrl;
+                    try {
+                        convertedDataUrl = canvas.toDataURL(mimeType);
+                    } catch (error) {
+                        console.error('Conversion failed:', error);
+                        document.getElementById('log').value = "Conversion failed. Your browser may not support this format.";
+                        return;
+                    }
+
+                    // Display the converted image
                     const obeDiv = document.getElementById('obe');
                     obeDiv.innerHTML = `<img src="${convertedDataUrl}" alt="Converted Image" style="max-width: 100%;">`;
+
+                    // Update log and download link
                     document.getElementById('log').value = "Image Converted";
                     const downloadLink = document.getElementById('downloadLink');
                     downloadLink.href = convertedDataUrl;
-                    downloadLink.download = `converted-image.${outputFormat.split('/')[1]}`;
+                    downloadLink.download = `converted-image.${outputFormat}`;
                     downloadLink.style.display = 'inline';
                 };
             };
