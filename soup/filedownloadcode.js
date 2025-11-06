@@ -27,6 +27,8 @@ function downloadContent() {
     "zip": "application/zip",
     "mp3": "audio/mpeg",
     "mp4": "video/mp4",
+    "avif": "image/avif",
+    "bmp": "image/bmp"
     // Add other extensions as needed
   };
 
