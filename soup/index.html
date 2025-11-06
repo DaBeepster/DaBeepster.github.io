@@ -14,7 +14,8 @@
     <script src="./exitprompt.js" type="text/javascript"></script>
     <script src="./richtext.js" type="text/javascript"></script>
     <script src="./grr.js" type="text/javascript"></script>
-    <script src="image-tools.js"></script>
+    <script src="./image-tools.js" defer></script>
+    <script src="./image-extras.js" defer></script>
     <meta name="description" content="something silly" />
     <meta
       property="og:image"
@@ -106,6 +107,8 @@
     </div>
     <div class="buts hidden" id="imgButtons">
   <input type="file" id="fileInput" accept="image/*" />
+  <button id="displayButton" style="margin-left:8px;">Display Selected</button>
+  <button id="encodeButton"  style="margin-left:8px;">Encode to Base64</button>
 
   <label style="margin-left:8px;">
     Mode:
